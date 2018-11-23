@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+    <div id="test">
+        <!--<h1>hello react</h1>-->
+    </div>
+
+
+
+    <script type="text/javascript" src="../Javascript/react.development.js"></script>
+    <script type="text/javascript" src="../Javascript/react-dom.development.js"></script>
+    <script type="text/javascript" src="../Javascript/babel.min.js"></script>
+    <!--babel 将jsx解析为js-->
+
+    <script type="text/babel"> // 告诉babel.js 去解析 jsx语句
+
+
+        // 功能： 动态展示列表数据
+
+        // ES6标准新增了一种新的函数：Arrow Function（箭头函数）。
+
+        /*
+        *   x => x * X
+        *   function (x){
+        *       return x * x
+        *   }
+        *
+        * */
+
+        const names = ['jquery','zeptoo','angular','react','vue'];
+
+        const ul = (
+            <ul>
+                {
+                    names.map((name,index) => <li key={index}>{name}</li> )
+                }
+            </ul>
+        );
+
+        ReactDOM.render(ul,document.getElementById('test'));
+
+    </script>
+
+</body>
+</html>
