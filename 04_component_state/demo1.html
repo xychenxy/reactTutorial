@@ -45,7 +45,6 @@
 
                 this.handleClick = this.handleClick.bind(this)
 
-
             }
 
             // this is a new method; 内部的this默认不是组件对象，而是undefined
@@ -55,19 +54,29 @@
 //                console.log();
 
                 // 计算出 之前的状态 并且取反
-                const isLike = !this.state.isLike;
+                const test = !this.state.isLike;
 
-                // 更新状态
-                this.setState({isLike})
+                // 更新状态，使用大括号，是因为需要的是 对象
+                this.setState({isLike:test})
+
+
+                // 另一种简约的写法
+//                const isLike = !this.state.isLike;
+//
+//                // 更新状态，使用大括号，是因为需要的是 对象
+//                this.setState({isLike})
+
             }
 
 
             // this is override
             render(){
-                // 读取状态
-                const {isLike} = this.state;
-                // onClick 的 c 是大写
-                return <h1 onClick={this.handleClick}>{isLike?'你喜欢我':'我喜欢你'}</h1>;
+                // 读取状态, 其中一条写法 是 简约 写法
+//                const {isLike} = this.state;
+                const isLike = this.state.isLike;
+
+                // onClick 的 c 是大写, onclick 里面的 大括号 需要写 js 代码
+                return <h1 onClick={this.handleClick}> {isLike?'你喜欢我':'我喜欢你'} </h1>;
 
                 // 下面这个写法 效率低
                 //return <h1 onClick={this.handleClick.bind(this)}>{isLike?'你喜欢我':'我喜欢你'}</h1>;

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+    <div id="test1">
+        <!--<h1>hello react</h1>-->
+    </div>
+
+    <div id="test2"></div>
+
+    <div id="test3"></div>
+
+    <div id="test4"></div>
+
+
+    <script type="text/javascript" src="../Javascript/react.development.js"></script>
+    <script type="text/javascript" src="../Javascript/react-dom.development.js"></script>
+    <script type="text/javascript" src="../Javascript/prop-types.js"></script>
+    <script type="text/javascript" src="../Javascript/babel.min.js"></script>
+    <!--babel 将jsx解析为js-->
+
+
+    <script type="text/babel">
+
+        // 1。 定义组件
+        // 2。 渲染组件标签
+
+//        function Person(props) {
+//            return(
+//                    <ul>
+//                        <li>姓名：{props.name}</li>
+//                        <li>年龄：{props.age}</li>
+//                        <li>性别：{props.sex}</li>
+//                    </ul>
+//            )
+//        }
+
+
+        // 将上述功能，使用类的方法写出来
+
+        class Person extends React.Component{
+
+            render(){
+                return(
+                        <ul>
+                            <li>姓名：{this.props.name}</li>
+                            <li>年龄：{this.props.age}</li>
+                            <li>性别：{this.props.sex}</li>
+                        </ul>
+                )
+            }
+        }
+
+
+
+
+
+        // 这是一个默认值
+        Person.defaultProps = {
+            age: 25,
+            sex: 'Boy'
+        }
+
+        // 例如 name一定要输入的，
+        Person.propTypes ={
+            // 已经被弃用
+//            name: React.PropTypes.string.isRequired,
+
+            // 指定属性值的类型和必要性
+            name: PropTypes.string.isRequired,
+            age: PropTypes.number,
+        }
+
+
+        const p1 = {
+            name: 'Tom',
+            age: 18,
+            sex: 'Girl'
+        }
+
+
+        // ...的作用
+        // 1。 打包
+
+        // function fn(...as){}
+
+        // fn(1,2,3)
+
+        // 将1，2，3打包成 数组，放在as里面
+
+
+        // 2。 解包
+
+        // const arr1 = [1,2,3]
+
+        // const arr2 =[6, ...arr1, 9]
+
+
+        //ReactDOM.render(<Person name={p1.name} age={p1.age} sex={p1.sex}/>, document.getElementById("test1"));
+
+
+        // ...p1 意思就是拆对象
+        ReactDOM.render(<Person {...p1}/>, document.getElementById("test1"));
+
+
+
+        const p2 = {
+            name: 'Mike'
+
+        }
+
+        //ReactDOM.render(<Person name={p2.name} />, document.getElementById("test2"));
+        //ReactDOM.render(<Person name={p2.name} />, document.getElementById("test2"));
+
+        ReactDOM.render(<Person {...p2} />, document.getElementById("test2"));
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+</html>
