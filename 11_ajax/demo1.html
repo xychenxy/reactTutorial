@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+    <div id="test1">
+        <!--<h1>hello react</h1>-->
+    </div>
+
+    <div id="test2"></div>
+
+    <div id="test3"></div>
+
+    <div id="test4"></div>
+
+
+    <script type="text/javascript" src="../Javascript/react.development.js"></script>
+    <script type="text/javascript" src="../Javascript/react-dom.development.js"></script>
+    <script type="text/javascript" src="../Javascript/prop-types.js"></script>
+    <script type="text/javascript" src="../Javascript/babel.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <!--babel 将jsx解析为js-->
+
+
+    <script type="text/babel">
+
+        // 1。 定义组件
+        // 2。 渲染组件标签
+
+        class MostStarRepo extends React.Component{
+
+            state = {
+                repoName:'',
+                repoUrl:''
+            }
+
+
+            componentDidMount(){
+                // 发送异步的ajax请求 axios
+                const url = 'https://api.github.com/search/repositories?q=re&sort=stars'
+
+                axios.get(url)
+                    .then(response =>{
+                    const result = response.data
+                    //console.log(response)
+                    const {name,html_url} = result.items[0]
+                    this.setState({repoName:name,repoUrl:html_url})
+                    })
+                    .catch((err) =>{
+//                        alert(err.message)
+                        console.log(err.message)
+                    })
+
+                // 使用 fetch,经常使用上面的
+//                fetch(url)
+//                    .then(response =>{
+//                    return response.json()
+//                    })
+//                    .then(data =>{
+//                        const {name,html_url} = data.items[0]
+//                        this.setState({repoName:name,repoUrl:html_url})
+//                    })
+
+            }
+
+            render(){
+                const {repoName,repoUrl} = this.state
+                if(!repoName){
+                    return(
+                        <h2>Loading....</h2>
+                    )
+                }
+                else{
+                    return(
+                            <h2>Most star repo is <a href={repoUrl}>{repoName}</a></h2>
+                    )
+                }
+
+            }
+        }
+
+
+        ReactDOM.render(<MostStarRepo />, document.getElementById('test1'))
+
+
+
+
+    </script>
+
+</body>
+</html>
